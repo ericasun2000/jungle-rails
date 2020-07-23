@@ -1,4 +1,4 @@
-class Admin::DashboardController < ApplicationController
+class Admin::DashboardController < AuthenticationController
   def show
     @productCount = Product.count 
     @categoryCount = Category.count

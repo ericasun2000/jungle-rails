@@ -1,11 +1,14 @@
  <section class="dashboard-show">
+
+  <header class="page-header">
+    <h1>Admin &raquo; Store Stats</h1>
+  </header>
   
-  <h1>Store Stats</h1>
-  <div class="well">
+  <h4>
     <ul>
-    <li>Number of <%= link_to 'products', :admin_products %>: <%= @productCount %></li>
-    <li>Number of categories: <%= @categoryCount %></li>
+      <li>Number of <%= link_to 'products', :admin_products %>: <%= @productCount %></li>
+      <li>Number of <%= link_to 'categories', :admin_categories %>: <%= @categoryCount %></li>
     </ul>
-  </div>
+  </h4>
 
 </section>

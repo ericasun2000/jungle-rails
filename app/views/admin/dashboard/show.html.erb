@@ -1,5 +1,7 @@
 <h1>Store Stats</h1>
-<p>
-  Number of products: <%= Product.count %><br>
-  Number of categories: <%= Category.count %>
-</p>
+<div class="well">
+  <ul>
+  <li>Number of <%= link_to 'products', :admin_products %>: <%= @productCount %></li>
+  <li>Number of categories: <%= @categoryCount %></li>
+  </ul>
+</div>

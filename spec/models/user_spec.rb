@@ -1,5 +1,43 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'Validations' do
+
+    it 'should have password field' do
+      @user = User.new(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: nil, password_confirmation: "hi")
+      expect(@user).to_not be_valid
+    end
+
+    it 'should have password_confirmation field' do
+      @user = User.new(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "hi", password_confirmation: "")
+      expect(@user).to_not be_valid
+    end
+
+    it 'should have matching password and password_confirmation fields (complies)' do
+      @user = User.new(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "hi", password_confirmation: "hi")
+      expect(@user).to be_valid
+    end
+
+    it 'should have matching password and password_confirmation fields (violates)' do
+      @user = User.new(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "hi", password_confirmation: "hello")
+      expect(@user).to_not be_valid
+    end
+
+    it 'should have first_name field' do
+      @user = User.new(first_name: nil, last_name: "Sun", email: "ericasun@email.com", password: "hi", password_confirmation: "hi")
+      expect(@user).to_not be_valid
+    end
+
+    it 'should have last_name field' do
+      @user = User.new(first_name: "Erica", last_name: nil, email: "ericasun@email.com", password: "hi", password_confirmation: "hi")
+      expect(@user).to_not be_valid
+    end
+
+    it 'should have email field' do
+      @user = User.new(first_name: "Erica", last_name: "Sun", email: nil, password: "hi", password_confirmation: "hi")
+      expect(@user).to_not be_valid
+    end
+
+  end
+
 end

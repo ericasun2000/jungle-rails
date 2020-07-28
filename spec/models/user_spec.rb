@@ -79,12 +79,18 @@ RSpec.describe User, type: :model do
     end
 
     it 'should log user in regardless of email spaces before' do
+      @user = User.create(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "hello", password_confirmation: "hello")
+      expect(User.authenticate_with_credentials("   ericasun@email.com", "hello")).to eq(@user)
     end 
 
     it 'should log user in regardless of email spaces after' do
+      @user = User.create(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "hello", password_confirmation: "hello")
+      expect(User.authenticate_with_credentials("ericasun@email.com ", "hello")).to eq(@user)
     end 
 
     it 'should log user in regardless of email spaces before and after' do
+      @user = User.create(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "hello", password_confirmation: "hello")
+      expect(User.authenticate_with_credentials(" ericasun@email.com  ", "hello")).to eq(@user)
     end 
 
 

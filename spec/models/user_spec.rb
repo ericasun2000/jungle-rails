@@ -40,12 +40,15 @@ RSpec.describe User, type: :model do
 
     it 'should have unique email field' do
       @user1 = User.create(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "hi", password_confirmation: "hi")
-      @user2 = User.create(first_name: "John", last_name: "Smith", email: "ericaSUN@email.com", password: "hello", password_confirmation: "hello")
+      @user2 = User.new(first_name: "John", last_name: "Smith", email: "ericaSUN@email.com", password: "hello", password_confirmation: "hello")
       byebug
       expect(@user2).to_not be_valid
     end
 
+    it 'should have password minimum length' do
+      @user = User.new(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "h", password_confirmation: "h")
+      expect(@user).to_not be_valid
+    end
 
   end
-
 end

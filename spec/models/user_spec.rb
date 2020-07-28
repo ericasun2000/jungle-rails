@@ -52,51 +52,41 @@ RSpec.describe User, type: :model do
   end
 
   describe '.authenticate_with_credentials' do
+    before(:all) do
+      @user = User.create(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "hello", password_confirmation: "hello")
+    end
 
     it 'should log user in if credentials are correct' do
-      @user = User.create(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "hello", password_confirmation: "hello")
       expect(User.authenticate_with_credentials("ericasun@email.com", "hello")).to eq(@user)
     end
 
     it 'should not log user in if email is missing' do
-      @user = User.create(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "hello", password_confirmation: "hello")
       expect(User.authenticate_with_credentials("", "hello")).to be_nil
     end
 
     it 'should not log user in if password is missing' do
-      @user = User.create(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "hello", password_confirmation: "hello")
       expect(User.authenticate_with_credentials("ericasun@email.com", "")).to be_nil
     end
 
     it 'should log user in regardless of email case' do
-      @user = User.create(first_name: "Erica", last_name: "Sun", email: "eRicasun@email.com", password: "hello", password_confirmation: "hello")
       expect(User.authenticate_with_credentials("eRiCaSun@email.COm", "hello")).to eq(@user)
     end 
 
     it 'should not log user in if password case is different' do
-      @user = User.create(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "hello", password_confirmation: "hello")
       expect(User.authenticate_with_credentials("ericasun@email.com", "heLlo")).to be_nil
     end
 
     it 'should log user in regardless of email spaces before' do
-      @user = User.create(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "hello", password_confirmation: "hello")
       expect(User.authenticate_with_credentials("   ericasun@email.com", "hello")).to eq(@user)
     end 
 
     it 'should log user in regardless of email spaces after' do
-      @user = User.create(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "hello", password_confirmation: "hello")
       expect(User.authenticate_with_credentials("ericasun@email.com ", "hello")).to eq(@user)
     end 
 
     it 'should log user in regardless of email spaces before and after' do
-      @user = User.create(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "hello", password_confirmation: "hello")
       expect(User.authenticate_with_credentials(" ericasun@email.com  ", "hello")).to eq(@user)
     end 
 
-
-
-
-
   end
-
 end

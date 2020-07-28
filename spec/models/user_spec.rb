@@ -38,6 +38,14 @@ RSpec.describe User, type: :model do
       expect(@user).to_not be_valid
     end
 
+    it 'should have unique email field' do
+      @user1 = User.create(first_name: "Erica", last_name: "Sun", email: "ericasun@email.com", password: "hi", password_confirmation: "hi")
+      @user2 = User.create(first_name: "John", last_name: "Smith", email: "ericaSUN@email.com", password: "hello", password_confirmation: "hello")
+      byebug
+      expect(@user2).to_not be_valid
+    end
+
+
   end
 
 end
